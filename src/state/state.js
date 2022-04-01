@@ -1,21 +1,51 @@
 import { createContext, useContext } from "react";
+import uuid from "react-uuid";
 
 const ACTION_TYPES = {
 	LOG_IN: "LOG_IN",
 	ADD_ITEM: "ADD_ITEM",
 	ADD_TODOS_TASK: "ADD_TODOS_TASK",
+	DELETE_ITEM: "DELETE_ITEM",
+	CHANGE_STATUS: "CHANGE_STATUS",
+	PRINT_MODAL: "PRINT_MODAL",
 };
 let inititalState = {
 	username: "",
-	workspase: [
-		{
-			workspaseName: "test1",
-			tasks: [
-				// { taskname: "todo", intasks: [] },
-				// { taskname: "doing", intasks: [] },
-				// { taskname: "done", intasks: [] },
-			],
-		},
+
+	categories: [{ categoryId: 1, categoryTitle: "JS" }],
+	tasks: [
+		// {
+		// 	taskID: 1,
+		// 	title: "React",
+		// 	description: "leran more info",
+		// 	status: "todo",
+		// 	priority: "low",
+		// 	categoryId: "1",
+		// },
+		// {
+		// 	taskID: 2,
+		// 	title: "React",
+		// 	description: "leran more info",
+		// 	status: "doing",
+		// 	priority: "low",
+		// 	categoryId: "1",
+		// },
+		// {
+		// 	taskID: 3,
+		// 	title: "React",
+		// 	description: "leran more info",
+		// 	status: "done",
+		// 	priority: "low",
+		// 	categoryId: "1",
+		// },
+		// {
+		// 	taskID: 4,
+		// 	title: "React",
+		// 	description: "leran more info",
+		// 	status: "todo",
+		// 	priority: "low",
+		// 	categoryId: "1",
+		// },
 	],
 };
 
@@ -28,45 +58,48 @@ function reducer(state, action) {
 			return { ...state, username: action.inputValue };
 		}
 		case ACTION_TYPES.ADD_ITEM: {
-			console.log(action.item);
 			return {
 				...state,
-				workspase: [
-					...state.workspase,
-					{
-						workspaseName: action.item,
-						tasks: [
-							{ taskname: "todo", intasks: [] },
-							{ taskname: "doing", intasks: [] },
-							{ taskname: "done", intasks: [] },
-						],
-					},
+				categories: [
+					...state.categories,
+					{ categoryId: uuid(), categoryTitle: action.item },
 				],
 			};
 		}
 		case ACTION_TYPES.ADD_TODOS_TASK: {
-			let updatedTasks = state.workspase[action.listNameIndex].tasks.map(
-				(item, index) => {
-					if (index !== action.i) {
-						return item;
-					} else {
-						return { ...item, intasks: [...item.intasks, action.value] };
-					}
-				}
-			);
-			let newWorkspace = [
-				...state.workspase,
-				{ ...state.workspase[action.listNameIndex], tasks: updatedTasks },
-			];
-			console.log("newWorkspace", newWorkspace);
-			let newState = {
+			return {
 				...state,
-				workspase: newWorkspace,
+				tasks: [...state.tasks, action.elem],
 			};
-
-			return newState;
 		}
-
+		case ACTION_TYPES.DELETE_ITEM: {
+			return {
+				...state,
+				tasks: state.tasks.filter((el) => el.taskID !== action.id),
+			};
+		}
+		case ACTION_TYPES.CHANGE_STATUS: {
+			let newArr = state.tasks.map((el) => {
+				if (el.taskID !== action.id) {
+					return el;
+				} else {
+					return { ...el, status: action.status };
+				}
+			});
+			return { ...state, tasks: newArr };
+		}
+		case ACTION_TYPES.PRINT_MODAL: {
+			let changeArr = state.tasks.map((el) => {
+				if (el.taskID === action.id) {
+					el.priority = action.priority;
+					el.status = action.status;
+					return el;
+				} else {
+					return el;
+				}
+			});
+			return { ...state, tasks: changeArr };
+		}
 		default:
 			throw new Error();
 	}

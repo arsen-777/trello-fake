@@ -1,23 +1,17 @@
 import "./App.css";
-import { useReducer } from "react";
-
+import { useReducer, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import ProjectPages from "./Pages/Boards/ProjectPages";
 import ProtectedRoutes from "./ProtectedRoutes";
 import ToDoList from "./components/ToDo/ToDoList";
-import {
-	reducer,
-	inititalState,
-	State,
-	useUserContext,
-	ACTION_TYPES,
-} from "./state/state";
+import { reducer, inititalState, State } from "./state/state";
 import Home from "./Pages/Home/Home";
+import Modal from "./components/Modal/Modal";
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, inititalState);
-	// console.log(state, "himnakan");
+
 	return (
 		<State.Provider value={{ state, dispatch }}>
 			<BrowserRouter>
@@ -32,12 +26,12 @@ function App() {
 						path="/projects"
 						element={
 							<ProtectedRoutes state={state}>
-								<ProjectPages dispatch={dispatch} state={state} />
+								<ProjectPages />
 							</ProtectedRoutes>
 						}
 					></Route>
 					<Route
-						path="/toDoList"
+						path="/toDoList/:categoryId"
 						element={<ToDoList data={state} dispatch={dispatch} />}
 					></Route>
 				</Routes>

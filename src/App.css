@@ -1,0 +1,14 @@
+.flexed {
+	display: flex;
+	justify-content: space-between;
+}
+.column {
+	display: flex;
+	flex-direction: column;
+	width: 33%;
+	/* border: 1px solid g; */
+}
+.task {
+	outline: 1px solid red;
+	border-radius: 5px;
+}

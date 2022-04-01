@@ -2,10 +2,12 @@ import React from "react";
 import { useState } from "react";
 import Carts from "../../components/Carts/Carts";
 import { ACTION_TYPES } from "../../state/state";
+import { useUserContext } from "../../state/state";
 
-export default function ProjectPages({ dispatch, state }) {
+export default function ProjectPages() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [inpValue, setInpValue] = useState("");
+	const { dispatch } = useUserContext();
 
 	const toggleCart = () => {
 		setIsOpen(!isOpen);
@@ -32,7 +34,7 @@ export default function ProjectPages({ dispatch, state }) {
 					</form>
 				</div>
 			)}
-			<Carts dispatch={dispatch} state={state} />
+			<Carts />
 		</div>
 	);
 }

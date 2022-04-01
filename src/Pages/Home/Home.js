@@ -5,7 +5,9 @@ export default function Home() {
 	return (
 		<div>
 			<h1>Welcome Trello</h1>
-			<Link to="/login">Sign in</Link>
+			<Link to="/login" className="signIn">
+				Sign in
+			</Link>
 		</div>
 	);
 }

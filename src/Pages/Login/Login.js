@@ -9,7 +9,7 @@ export default function Login({ dispatch, state }) {
 		if (state.username) {
 			nav("/projects");
 		}
-	}, [state.username]);
+	}, [state.username, nav]);
 
 	const handleInput = (e) => {
 		setInputValue(e.target.value);
