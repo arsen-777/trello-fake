@@ -9,6 +9,7 @@ const ACTION_TYPES = {
 	CHANGE_STATUS: "CHANGE_STATUS",
 	PRINT_MODAL: "PRINT_MODAL",
 };
+
 let inititalState = {
 	username: "",
 
@@ -91,9 +92,15 @@ function reducer(state, action) {
 		case ACTION_TYPES.PRINT_MODAL: {
 			let changeArr = state.tasks.map((el) => {
 				if (el.taskID === action.id) {
-					el.priority = action.priority;
-					el.status = action.status;
-					return el;
+					// el.priority = action.priority;
+					// el.status = action.status;
+					// el.title = action.title;
+					return {
+						...el,
+						priority: action.priority,
+						status: action.status,
+						title: action.title,
+					};
 				} else {
 					return el;
 				}
