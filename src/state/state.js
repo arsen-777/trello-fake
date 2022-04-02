@@ -13,7 +13,7 @@ const ACTION_TYPES = {
 let inititalState = {
 	username: "",
 
-	categories: [{ categoryId: 1, categoryTitle: "JS" }],
+	categories: [{ categoryId: 1, categoryTitle: "" }],
 	tasks: [
 		// {
 		// 	taskID: 1,

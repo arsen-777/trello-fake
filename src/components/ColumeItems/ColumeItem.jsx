@@ -2,7 +2,6 @@ import React, { Suspense, useState } from "react";
 import { useUserContext } from "../../state/state";
 import { ACTION_TYPES } from "../../state/state";
 const Modal = React.lazy(() => import("../Modal/Modal"));
-// import Modal from "../Modal/Modal";
 
 export default function ColumeItem({ elem }) {
 	const [isOpenModal, setIsOpenModal] = useState(false);
