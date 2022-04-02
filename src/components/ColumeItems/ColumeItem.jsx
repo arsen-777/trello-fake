@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useUserContext } from "../../state/state";
 import { ACTION_TYPES } from "../../state/state";
-import Modal from "../Modal/Modal";
+const Modal = React.lazy(() => import("../Modal/Modal"));
+// import Modal from "../Modal/Modal";
 
 export default function ColumeItem({ elem }) {
 	const [isOpenModal, setIsOpenModal] = useState(false);
@@ -41,7 +42,9 @@ export default function ColumeItem({ elem }) {
 
 				<button onClick={deleteItem}>x</button>
 			</div>
-			{isOpenModal && <Modal toggleModal={toggleModal} elem={elem} />}
+			<Suspense fallback={<div>loading...</div>}>
+				{isOpenModal && <Modal toggleModal={toggleModal} elem={elem} />}
+			</Suspense>
 		</>
 	);
 }

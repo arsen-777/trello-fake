@@ -56,7 +56,10 @@ const useUserContext = () => useContext(State);
 function reducer(state, action) {
 	switch (action.type) {
 		case ACTION_TYPES.LOG_IN: {
-			return { ...state, username: action.inputValue };
+			return {
+				...state,
+				username: action.user,
+			};
 		}
 		case ACTION_TYPES.ADD_ITEM: {
 			return {
