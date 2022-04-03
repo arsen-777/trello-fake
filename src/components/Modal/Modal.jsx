@@ -28,10 +28,22 @@ export default function Modal({ toggleModal, elem }) {
 	return (
 		<div>
 			<div ref={ref} className={styles.modal}>
-				<input value={title} onChange={(e) => setTitle(e.target.value)} />
-				{elem.title}
-				<span>{elem.priority}</span>,<span>{elem.status}</span>
-				<p>{elem.description}</p>
+				<div>
+					<span>Title: {elem.title}</span>
+					<input
+						placeholder="Change Title"
+						className={styles.modalInput}
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+					/>
+				</div>
+				<div>{elem.priority}</div>
+				<div>
+					<span>Status: {elem.status} </span>
+				</div>
+				<div>
+					<span>Desc: {elem.description}</span>
+				</div>
 				<select onChange={(e) => setPriority(e.target.value)}>
 					<option>Change Priority</option>
 					<option>high</option>

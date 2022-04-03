@@ -24,10 +24,10 @@ export default function ColumeItem({ elem }) {
 	};
 
 	return (
-		<>
+		<div>
 			<div className="task">
 				<input onClick={toggleModal} value={elem.title} />
-				<select onChange={changeOptionValue}>
+				<select onChange={changeOptionValue} defaultValue="">
 					<option value="todo" selected={elem.status === "todo"}>
 						todo
 					</option>
@@ -44,6 +44,6 @@ export default function ColumeItem({ elem }) {
 			<Suspense fallback={<div>loading...</div>}>
 				{isOpenModal && <Modal toggleModal={toggleModal} elem={elem} />}
 			</Suspense>
-		</>
+		</div>
 	);
 }

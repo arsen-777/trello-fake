@@ -1,8 +1,9 @@
 import { useParams } from "react-router";
 import { useUserContext } from "../../state/state";
 import Colume from "../Colums/Colume";
-
+import { useStyles } from "./todoStyle";
 export default function ToDoList() {
+	const styles = useStyles();
 	const { categoryId } = useParams();
 
 	const {
@@ -20,10 +21,10 @@ export default function ToDoList() {
 	const doneTasks = tasks.filter(
 		(task) => task.status === "done" && task.categoryId === categoryId
 	);
-	console.log(todoTasks, doingTasks, doneTasks);
+	// console.log(todoTasks, doingTasks, doneTasks);
 	return (
-		<div>
-			<div className="flexed">
+		<div className={styles.columnBlock}>
+			<div className={styles.flexed}>
 				<Colume
 					taskList={todoTasks}
 					columnTitle="todo"

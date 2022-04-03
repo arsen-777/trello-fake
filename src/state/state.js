@@ -56,10 +56,14 @@ const useUserContext = () => useContext(State);
 function reducer(state, action) {
 	switch (action.type) {
 		case ACTION_TYPES.LOG_IN: {
-			return {
-				...state,
-				username: action.user,
-			};
+			if (action.user.surnameValue === "" && action.user.nameValue === "") {
+				alert("Please write your name and surnam");
+			} else {
+				return {
+					...state,
+					username: action.user,
+				};
+			}
 		}
 		case ACTION_TYPES.ADD_ITEM: {
 			return {
